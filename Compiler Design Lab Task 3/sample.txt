@@ -1,1 +1,10 @@
 a+b = c; (5-1.5 = 3.5)
+
+	if (c == ' ' || c == '\n' || c == '\t') {
+            if (!t.empty()) {
+
+                if(keyWord(t)){ cout << t << " : Keyword"<<endl; }
+                else{ cout << t << " : Invalid Identifier"<<endl; }
+                t.clear();
+            }continue;
+        }
