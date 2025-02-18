@@ -1,0 +1,4 @@
+﻿  Source.cpp
+D:\Versity space\Cpp-learning\glut\sample1\sample1\Source.cpp(30,17): warning C4309: 'argument': truncation of constant value
+D:\Versity space\Cpp-learning\glut\sample1\sample1\Source.cpp(30,12): warning C4309: 'argument': truncation of constant value
+  sample1.vcxproj -> D:\Versity space\Cpp-learning\glut\sample1\Debug\sample1.exe
