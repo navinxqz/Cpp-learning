@@ -27,7 +27,7 @@ void RenderScene() {
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 
-	glTranslatef(0.0f, 0.0f, -400.0f);
+	glTranslatef(0.0f, 0.0f, -400.0f);	//sun draw
 	glColor3ub(255, 255, 0);
 	glDisable(GL_LIGHTING);
 	glutSolidSphere(30.0f, 30,30);
@@ -56,6 +56,8 @@ void RenderScene() {
 void SetupRC() {
 	GLfloat ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };
 	GLfloat diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };
+	GLfloat specularLight[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	GLfloat specref[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 
 	glEnable(GL_DEPTH_TEST);	//for hidden surface rm
 	glFrontFace(GL_CCW);	//counter clockwise
@@ -64,9 +66,12 @@ void SetupRC() {
 
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight);
 	glEnable(GL_LIGHT0);
 	glEnable(GL_COLOR_MATERIAL);
 	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, specref);
+	glMateriali(GL_FRONT, GL_SHININESS, 128);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
 void Timer(int value) {
