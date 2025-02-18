@@ -1,4 +1,5 @@
 #include <GL/glut.h>
+#include <iostream>
 #include <math.h>
 #include <cmath>
 using namespace std;
@@ -14,7 +15,7 @@ void ChangeSize(GLsizei w, GLsizei h) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	gluPerspective(45.0f, fAspect, 1.0f, 225.0f);
+	gluPerspective(45.0f, fAspect, 1.0, 1000.0);	//fieldview 45 degree
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
@@ -49,14 +50,35 @@ void RenderScene() {
 	if (fEarthRot > 360.0f) { fEarthRot = 0.0f; }
 	glutSwapBuffers();
 }
+void SetupRC() {
+	GLfloat ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };
+	GLfloat diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };
 
+	glEnable(GL_DEPTH_TEST);	//for hidden surface rm
+	glFrontFace(GL_CCW);	//counter clockwise
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_LIGHTING);
+
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
+	glEnable(GL_LIGHT0);
+	glEnable(GL_COLOR_MATERIAL);
+	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+}
+void Timer(int value) {
+	glutPostRedisplay();
+	glutTimerFunc(100, Timer, 1);
+}
 int main(int argc, char* argv[]) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("OpenGL Solar System");
 	glutReshapeFunc(ChangeSize);
 	glutDisplayFunc(RenderScene);
+	glutTimerFunc(33, Timer, 1);
 
+	SetupRC();
 	glutMainLoop();
 	return 0;
 }
