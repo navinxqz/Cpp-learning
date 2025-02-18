@@ -27,9 +27,10 @@ void RenderScene() {
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 
-	glTranslatef(0.0f, 0.0f, -300.0f);
-	glColor3b(255, 255, 0);
-	glutSolidSphere(15.0f, 15, 15);
+	glTranslatef(0.0f, 0.0f, -400.0f);
+	glColor3ub(255, 255, 0);
+	glDisable(GL_LIGHTING);
+	glutSolidSphere(30.0f, 30,30);
 	glEnable(GL_LIGHTING);
 
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
@@ -41,13 +42,15 @@ void RenderScene() {
 	glColor3ub(200, 200, 200);	//moon draw & rotation
 	glRotatef(fMoonRot, 0.0f, 1.0f, 0.0f);
 	glTranslatef(30.0f, 0.0f, 0.0f);
-	fMoonRot += 15.0f;
-	if (fMoonRot > 360.0f) { fMoonRot = 0.0f; }
 	glutSolidSphere(6.0f, 15, 15);
-
 	glPopMatrix();
+
 	fEarthRot += 5.0f;
 	if (fEarthRot > 360.0f) { fEarthRot = 0.0f; }
+
+	fMoonRot += 15.0f;
+	if (fMoonRot > 360.0f) { fMoonRot = 0.0f; }
+	
 	glutSwapBuffers();
 }
 void SetupRC() {
